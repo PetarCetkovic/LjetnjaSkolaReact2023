@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
-import { Card } from "./Card"
+
+import { MemoDemo } from "./memoDemo"
 
 export const RickAndMortyCharacters = () => {
     const [characters, setCharacters] = useState([])
@@ -9,7 +10,7 @@ export const RickAndMortyCharacters = () => {
 
     const handleFetchCharacters = async () => {
         try {
-            const response = await fetch(`https://rickandmortyapi.com/api/character?page=${page}`)
+            const response = await fetch(`https://rickandmortyapi.com/api/character`)
             const data = await response.json()
 
             setCharacters(data.results)
@@ -20,7 +21,7 @@ export const RickAndMortyCharacters = () => {
 
     useEffect(() => {
         handleFetchCharacters()
-    }, [page])
+    }, [])
 
     useEffect(() => {
         console.log("PAGE: ", page)
@@ -36,7 +37,7 @@ export const RickAndMortyCharacters = () => {
         <button disabled={disabled} onClick={()=>{handlePageChange(page-1)}}>PREV</button>
         <button onClick={()=>{handlePageChange(page+1)}}>NEXT</button>
 
-        {characters.map(({name,status,image,location, url}, index) => <Card key={index} name={name} status={status} image={image} location={location} url={url}/>)}
-
+        {/* {characters.map(({name,status,image,location, url}, index) => <Card key={index} name={name} status={status} image={image} location={location} url={url}/>)} */}
+        <MemoDemo list={characters} page={page}/>
     </>
 }
