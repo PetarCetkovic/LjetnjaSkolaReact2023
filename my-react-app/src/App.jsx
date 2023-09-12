@@ -2,6 +2,10 @@ import { useState } from 'react'
 import { RickAndMortyCharacters } from './components/RickAndMortyCharacters'
 
 import './App.css'
+import { Counter } from './components/reducerDemo'
+import { RefDemo } from './components/refDemo'
+import { ForwRefDemo } from './components/forwardRefDemo'
+import { ThemeSwitcher } from './components/ThemeSwitcher'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -13,7 +17,11 @@ function App() {
     setInput(event.target.value)
   }
 
-  return <RickAndMortyCharacters/>
+  return <ThemeSwitcher /> 
+  //<ForwRefDemo /> 
+  // <RefDemo />
+  // <Counter /> 
+  // <RickAndMortyCharacters/>
     /* <>
       <h1>Vite + React</h1>
       <div className="card">
