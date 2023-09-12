@@ -1,52 +1,37 @@
 import { useState } from 'react'
+import { BrowserRouter, Routes, Route, Link, createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { RickAndMortyCharacters } from './components/RickAndMortyCharacters'
-
-import './App.css'
+import { HomePage } from './pages/home'
+import { AboutPage } from './pages/about'
 import { Counter } from './components/reducerDemo'
 import { RefDemo } from './components/refDemo'
 import { ForwRefDemo } from './components/forwardRefDemo'
 import { ThemeSwitcher } from './components/ThemeSwitcher'
 import { ThemeContext } from './contexts/ThemeContext'
 import { Toolbar } from './components/Toolbar'
+import './App.css'
+import { AppLayout } from './layout'
 
-const {Provider} = ThemeContext
+const { Provider } = ThemeContext
 
 function App() {
-  const [count, setCount] = useState(0)
-  const [input, setInput] = useState('dsaasd')
+  const router = createBrowserRouter([
+    {
+      path: "", element: <AppLayout />, children: [
+        {
+          index:true, element: <HomePage />
+        },
+        {
+          path: "about",
+          children: [{
+            index:true, element: <AboutPage />
+          },{path: "team", element:<h1>Team page</h1>
+        }]
+        }]
+    }])
 
-  const handleUserInput = (event)=>{
-    
-    console.log(event.target.value);
-    setInput(event.target.value)
-  }
 
-  return <><Provider value='dark' >
-
-  </Provider>
-  <Toolbar />
-
-  </> 
-  //<ThemeSwitcher /> 
-  //<ForwRefDemo /> 
-  // <RefDemo />
-  // <Counter /> 
-  // <RickAndMortyCharacters/>
-    /* <>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={(event) => console.log(event)}>
-          count is {count}
-        </button>
-        <p style={{ backgroundColor: "limegreen" }}>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-      <input name='test' value={input} placeholder='Enter text' onChange={handleUserInput} />
-    </> */
+  return <RouterProvider router={router} />
 }
 
 export default App;
