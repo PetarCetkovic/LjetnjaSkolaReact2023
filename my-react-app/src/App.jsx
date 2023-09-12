@@ -6,6 +6,10 @@ import { Counter } from './components/reducerDemo'
 import { RefDemo } from './components/refDemo'
 import { ForwRefDemo } from './components/forwardRefDemo'
 import { ThemeSwitcher } from './components/ThemeSwitcher'
+import { ThemeContext } from './contexts/ThemeContext'
+import { Toolbar } from './components/Toolbar'
+
+const {Provider} = ThemeContext
 
 function App() {
   const [count, setCount] = useState(0)
@@ -17,7 +21,13 @@ function App() {
     setInput(event.target.value)
   }
 
-  return <ThemeSwitcher /> 
+  return <><Provider value='dark' >
+
+  </Provider>
+  <Toolbar />
+
+  </> 
+  //<ThemeSwitcher /> 
   //<ForwRefDemo /> 
   // <RefDemo />
   // <Counter /> 
