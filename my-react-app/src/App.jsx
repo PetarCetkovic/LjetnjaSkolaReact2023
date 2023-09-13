@@ -1,41 +1,40 @@
-import { useState } from 'react'
-import { BrowserRouter, Routes, Route, Link, createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { RickAndMortyCharacters } from './components/RickAndMortyCharacters'
-import { HomePage } from './pages/home'
-import { AboutPage } from './pages/about'
-import { Counter } from './components/reducerDemo'
-import { RefDemo } from './components/refDemo'
-import { ForwRefDemo } from './components/forwardRefDemo'
-import { ThemeSwitcher } from './components/ThemeSwitcher'
-import { ThemeContext } from './contexts/ThemeContext'
-import { Toolbar } from './components/Toolbar'
-import './App.css'
-import { AppLayout } from './layout'
-import { UsersPage } from './pages/users'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { HomePage } from './pages/home';
+import { AboutPage } from './pages/about';
+import { AppLayout } from './layout';
+import { UsersPage } from './pages/users';
+import { LoginPage } from './pages/login';
 
-const { Provider } = ThemeContext
-
-function App() {
+const App = () => {
   const router = createBrowserRouter([
     {
-      path: "", element: <AppLayout />, children: [
+      path: '',
+      element: <AppLayout />,
+      children: [
         {
-          index:true, element: <HomePage />, exact:true
+          index: true,
+          element: <HomePage />,
+          exact: true,
         },
         {
-          path: "about",
-          children: [{
-            index:true, element: <AboutPage />, exact:true,
-          },{path: "team", element:<h1>Team page</h1>
-        }]
+          path: 'about',
+          children: [
+            {
+              index: true,
+              element: <AboutPage />,
+              exact: true,
+            },
+            { path: 'team', element: <h1>Team page</h1> },
+          ],
         },
-      
-        {path:"users/:id", element: <UsersPage/>},
-        {path:"*", element:<h1>404 Not found</h1>}]
-    }])
+        { path: 'login', element: <LoginPage /> },
+        { path: 'users/:id', element: <UsersPage /> },
+        { path: '*', element: <h1>404 Not found</h1> },
+      ],
+    },
+  ]);
 
-
-  return <RouterProvider router={router} />
-}
+  return <RouterProvider router={router} />;
+};
 
 export default App;
