@@ -1,11 +1,16 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+
 import { authService } from '../../service/auth';
+import { UserContext } from '../../contexts/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 const { getLoggedInUser } = authService;
 
 export const LoginPage = () => {
+  const { handleUserLogin } = useContext(UserContext);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleInputChange = (event, setState) => {
     const {
@@ -22,6 +27,8 @@ export const LoginPage = () => {
       const body = JSON.stringify({ username, password });
 
       const response = await getLoggedInUser(body);
+      handleUserLogin(response.data.token);
+      navigate('/');
     } catch (error) {
       console.log(error);
     }
