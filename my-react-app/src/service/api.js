@@ -39,3 +39,18 @@ export const nodeBackend = axios.create({
     'Content-Type': 'application/json',
   },
 });
+
+nodeBackend.interceptors.request.use(
+  config => {
+    const token = localStorage.getItem('token');
+
+    if (token)
+      config.headers = {
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/json',
+      };
+
+    return config;
+  },
+  error => Promise.reject(error)
+);
