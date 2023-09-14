@@ -1,5 +1,5 @@
 {
-  "name": "react-strapi-auth",
+  "name": "react-strapi",
   "private": true,
   "version": "0.1.0",
   "description": "A Strapi application",
@@ -20,7 +20,7 @@
     "name": "A Strapi developer"
   },
   "strapi": {
-    "uuid": "6b55bca8-ee42-4ad4-b801-debfde3ccdb3"
+    "uuid": "3ee21045-241e-4295-8a76-c8e9ec103f92"
   },
   "engines": {
     "node": ">=16.0.0 <=20.x.x",
